@@ -13,7 +13,14 @@
 
     public record PaymentItemResp
     {
+
         public int Sequence { get; init; }
         public decimal Amount { get; init; }
+        public decimal Value { get; }
+        public PaymentItemResp(int sequence, decimal value)
+        {
+            Sequence = sequence;
+            Value = value;
+        }
     }
 }

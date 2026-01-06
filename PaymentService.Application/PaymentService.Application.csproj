@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Querie\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PaymentService.Domain\PaymentService.Domain.csproj" />
     <ProjectReference Include="..\PaymentService.Infra\PaymentService.Infra.csproj" />
 

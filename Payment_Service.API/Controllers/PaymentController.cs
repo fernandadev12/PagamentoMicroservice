@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PaymentService.Application.Commands;
+using PaymentService.Application.Command;
 using PaymentService.Application.DTO;
-using PaymentService.Application.Payments;
-using PaymentService.Domain.ValueObjects;
+using PaymentService.Application.Querie;
+using PaymentService.Domain.Enums;
 
 namespace PaymentService.Api.Controllers
 {
@@ -50,14 +50,37 @@ namespace PaymentService.Api.Controllers
             return Ok(result);
         }
 
+
         /// <summary>
-        /// Lista todos os pagamentos.
+        /// Lista os dados de um pagamento.
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllPayments()
         {
-            var list = await _mediator.Send(new GetPaymentsQuery());
+            var list = await _mediator.Send(new GetListPaymentsQuerie());
             return Ok(list);
         }
+
+        /// <summary>
+        /// Atualiza os dados de um pagamento.
+        /// </summary>
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdatePayment([FromBody] PaymentRequestDTO request)
+        {
+            var list = await _mediator.Send(new UpdatePaymentCommand());
+            return Ok(list);
+        }
+        /// <summary>
+        /// Cancela um pagamento.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>true para cancelados</returns>
+        [HttpPost]
+        public async Task<IActionResult> CancelPayment(Guid id)
+        {
+            var paymentCancel = await _mediator.Send(new CancelPaymentCommand());
+            return Ok(paymentCancel);
+        }
+        
     }
 }

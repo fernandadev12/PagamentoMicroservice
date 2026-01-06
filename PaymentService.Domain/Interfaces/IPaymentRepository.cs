@@ -4,9 +4,10 @@ namespace PaymentService.Domain.Repositories
 {
     public interface IPaymentRepository
     {
-        Task<Payment?> GetByIdAsync(Guid id, CancellationToken ct = default);
-        Task<IReadOnlyList<Payment>> GetAllAsync(CancellationToken ct = default);
-        Task AddAsync(Payment payment, CancellationToken ct = default);
-        Task SaveChangesAsync(CancellationToken ct = default);
+        Task <IEnumerable<Payment>> GetAllPayments();
+        Task<Payment?> GetByIdAsync(Guid id);
+        Task<bool> CancelPayment(Guid id);
+        Task <bool> SaveChangesAsync(Payment pay);
+        Task <bool> UpdateChangesAsync(Payment pay);
     }
 }

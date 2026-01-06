@@ -1,8 +1,7 @@
 ﻿using PaymentService.API.ViewModels;
 using PaymentService.Application.DTO;
 
-
-namespace PaymentService.Application.Mapper
+namespace Payment_Service.API.Mapper
 {
 
     public static class PaymentMapper
