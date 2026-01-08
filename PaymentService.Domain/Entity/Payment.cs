@@ -12,12 +12,14 @@ namespace PaymentService.Domain.Entities
         public Discount Discount { get; private set; }
         public Installments Installments { get; private set; }
         public Money FinalAmount { get; private set; }
-        public PaymentMethod PaymentMethodId { get; private set; }
         public Status Status { get; set; }
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
         private readonly List<PaymentItem> _items = new();
         public IEnumerable<PaymentItem> Items => _items.AsReadOnly();
+        public Guid PaymentMethodId { get; private set; }   // FK
+        public PaymentMethod PaymentMethod { get; private set; } // Navegação
+
 
         // Construtor protegido para EF Core
         protected Payment() { }

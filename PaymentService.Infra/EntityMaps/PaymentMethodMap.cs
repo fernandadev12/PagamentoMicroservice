@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PaymentService.Domain.Entity;
 
@@ -26,10 +21,10 @@ namespace PaymentService.Infra.EntityMaps
 
             // Débito
             builder.OwnsOne(pm => pm.debitCard);
-            builder
-                .HasOne(pm => pm.PaymentId)
-                .WithOne() // O WithOne do lado do Payment já definiu o mapeamento
-                .HasForeignKey<PaymentMethod>("PaymentId");
+            builder.HasOne(pm => pm.Payment)           // navegação
+                .WithOne(p => p.PaymentMethod)      // navegação inversa
+                .HasForeignKey<PaymentMethod>(pm => pm.PaymentId); // FK escalar
+
 
         }
     }

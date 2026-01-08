@@ -9,7 +9,9 @@ namespace PaymentService.Domain.Entity
         public CreditCardPayment creditCard { get; set; }
         public PaymentPix pix { get; set; }
         public DebitPayment debitCard { get; set; }
-        public Payment PaymentId { get; set; }
+        public Guid PaymentId { get; private set; }   // FK
+        public Payment Payment { get; private set; }  // Navegação
+
 
     }
 }
